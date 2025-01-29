@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Joke Generator</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            padding: 30px;
+        }
+        #joke-box {
+            font-size: 1.5em;
+            margin: 20px;
+            padding: 20px;
+            border: 2px solid #ddd;
+            display: inline-block;
+            width: 50%;
+            background-color: #f9f9f9;
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 1em;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            margin-top: 15px;
+        }
+    </style>
+    <script>
+        function fetchJoke() {
+            fetch("/get_joke")
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("joke-box").textContent = data.joke;
+                })
+                .catch(error => console.error("Error fetching joke:", error));
+        }
+    </script>
+</head>
+<body>
+    <h1>Random Joke Generator 😂</h1>
+    <div id="joke-box">Click the button to get a joke!</div>
+    <br>
+    <button onclick="fetchJoke()">Get Another Joke</button>
+</body>
+</html>
